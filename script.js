@@ -18,7 +18,7 @@ function sortedArrayToBST (arr, start = 0, end = arr.length - 1) {
 
     //recursive case
 
-    mid = Math.floor((start + end) / 2); // middle of the array, rounded down 
+    const mid = Math.floor((start + end) / 2); // middle of the array, rounded down 
 
     const node = new Node (arr[mid]); //the value at the middle of the array is the data
 
