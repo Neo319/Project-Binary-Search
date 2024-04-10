@@ -71,7 +71,6 @@ class Tree {
 
     //inserts a given value in the appropriate position in the tree
     insert (value) {
-        console.log('called')
         this.root = this._insertRec(value, this.root)
     }
 
@@ -96,7 +95,62 @@ class Tree {
         return root;
     }
     
+    // Removes given value from tree, returning null if not found
+    remove(value, root = this.root) {
+        // Base case: If the root is null, return null (value not found)
+        if (root === null) {
+            return null;
+        }
+
+        // If the value matches the current node's data, mark the node for removal
+        if (value === root.data) {
+            return this.removeNode(root);
+        }
+
+        // Recur down the tree to find the node to remove
+        if (value < root.data) {
+            root.left = this.remove(value, root.left);
+        } else {
+            root.right = this.remove(value, root.right);
+        }
+
+        // Return the modified root
+        return root;
+    }
+
+    // Helper method to remove the node
+    removeNode(node) {
+        // Case 1: Node has no children (leaf node)
+        if (node.left === null && node.right === null) {
+            return null;
+        }
+        // Case 2: Node has one child
+        if (node.left === null) {
+            return node.right;
+        }
+        if (node.right === null) {
+            return node.left;
+        }
+        // Case 3: Node has two children
+        // Find the successor (smallest node in the right subtree)
+        let successor = this.findMin(node.right);
+        // Copy the successor's data to the current node
+        node.data = successor.data;
+        // Remove the successor node
+        node.right = this.remove(successor.data, node.right);
+        return node;
+    }
+
+    // Helper method to find the minimum node in a subtree
+    findMin(node) {
+        while (node.left !== null) {
+            node = node.left;
+        }
+        return node;
+    }
 }
+    
+
  
 
 const myArray = [3, 5, 7, 9, 11, 13, 15] //sample
@@ -106,6 +160,8 @@ const balancedTree = new Tree(myArray);
 balancedTree.insert(2);
 balancedTree.insert(20);
 balancedTree.insert(8)
+
+balancedTree.remove(5);
 
 balancedTree.prettyPrint();
 balancedTree.regularPrint();
