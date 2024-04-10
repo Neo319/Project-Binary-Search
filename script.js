@@ -148,6 +148,26 @@ class Tree {
         }
         return node;
     }
+
+    //returns a node with the given value
+    find (value) {
+        let root = this.root
+        while (root !== null) {
+            if (value < root.data) {
+                root = root.left
+            }
+            else if (value > root.data) {
+                root = root.right
+            }
+            else if (value === root.data) {
+                return root;
+            }
+        }
+        return null; //not found
+    }
+
+    
+
 }
     
 
@@ -163,7 +183,11 @@ balancedTree.insert(8)
 
 balancedTree.remove(5);
 
+
+
 balancedTree.prettyPrint();
 balancedTree.regularPrint();
 
 console.log(balancedTree);
+
+console.log(balancedTree.find(5))
