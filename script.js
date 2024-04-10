@@ -48,6 +48,26 @@ class Tree {
         this.prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
         }
     };
+
+    // traverses the existing tree, using inorder traversal, executing a callback fn
+    inOrderTraversal (node = this.root, callback) {
+        
+        //base case
+        if (node !== null) {
+
+            //recursive case
+            this.inOrderTraversal(node.left, callback);
+            callback(node.data);
+            this.inOrderTraversal(node.right, callback);
+        }
+    };
+
+    //test: printing it
+    regularPrint () {
+        this.inOrderTraversal(this.root, function print (node) {
+            console.log(node);
+        })
+    };
 }
  
 
@@ -56,5 +76,6 @@ const myArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] //sample
 const balancedTree = new Tree(myArray);
 
 balancedTree.prettyPrint();
+balancedTree.regularPrint();
 
 console.log(balancedTree);
