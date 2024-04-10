@@ -57,7 +57,7 @@ class Tree {
 
             //recursive case
             this.inOrderTraversal(node.left, callback);
-            callback(node.data);
+            callback(node);
             this.inOrderTraversal(node.right, callback);
         }
     };
@@ -65,15 +65,47 @@ class Tree {
     //test: printing it
     regularPrint () {
         this.inOrderTraversal(this.root, function print (node) {
-            console.log(node);
+            console.log(node.data);
         })
     };
+
+    //inserts a given value in the appropriate position in the tree
+    insert (value) {
+        console.log('called')
+        this.root = this._insertRec(value, this.root)
+    }
+
+    //helper function
+    _insertRec (value, root = this.root) {
+
+        //if node is empty, creates a new node (insertion point)
+        if (root === null) {
+            this.root = new Node (value);
+            return this.root;
+        }
+
+        //otherwise, recur down the tree
+        if (value < root.data) 
+        {
+            root.left = this._insertRec (value, root.left)
+        }
+        else if (value > root.data)
+        {
+            root.right = this._insertRec (value, root.right)
+        }
+        return root;
+    }
+    
 }
  
 
-const myArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] //sample
+const myArray = [3, 5, 7, 9, 11, 13, 15] //sample
 
 const balancedTree = new Tree(myArray);
+
+balancedTree.insert(2);
+balancedTree.insert(20);
+balancedTree.insert(8)
 
 balancedTree.prettyPrint();
 balancedTree.regularPrint();
