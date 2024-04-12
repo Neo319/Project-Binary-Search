@@ -247,7 +247,16 @@ class Tree {
         return callback(result);
     }
 
+    //returns the height of the node (number of 'edges' in longest path to leaf node)
+    height (node) {
+        if (!node) return 0;
 
+        const leftTree = this.height(node.left);
+        const rightTree = this.height(node.right);
+
+        return Math.max(leftTree, rightTree) + 1
+
+    }
 
 }
     
@@ -274,3 +283,5 @@ console.log(balancedTree);
 console.log(balancedTree.inOrder());
 console.log(balancedTree.preOrder());
 console.log(balancedTree.postOrder());
+
+console.log(balancedTree.height(balancedTree.root))
