@@ -181,7 +181,7 @@ class Tree {
             const current = queue.shift();
             // Process current node using the callback function
             // Add current node to the result array
-            result.push(callback(current));
+            result.push(current);
     
             // Enqueue left child if exists
             if (current.left) {
@@ -193,12 +193,17 @@ class Tree {
             }
         }
     
-        return result;
+        return callback(result);
     }
     
     // Default callback function
-    static defaultCallback(node) {
-        return node.data;
+    static defaultCallback(nodeArr) {
+        let result = []
+        while (nodeArr.length > 0) {
+            let current = nodeArr.shift();
+            result.push(current.data);
+        }
+        return result;
     }
     
 
