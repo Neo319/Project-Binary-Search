@@ -279,6 +279,21 @@ class Tree {
 
     }
 
+    isBalanced () {
+        const root = this.root;
+        if (!root) return null;
+
+        const leftTree = this.height(root.left);
+        const rightTree = this.height(root.right);
+
+        const min = Math.min(leftTree, rightTree);
+        const max = Math.max(leftTree, rightTree);
+
+        // if the difference in height is greater than 1, return false
+        if (max - min > 1) return false;
+        else return true;
+    }
+
 }
     
 
@@ -294,7 +309,8 @@ balancedTree.insert(8)
 
 balancedTree.remove(5);
 
-
+balancedTree.root.right.right.right.right = new Node(50);
+balancedTree.root.right.right.right.right.right = new Node(51);
 
 balancedTree.prettyPrint();
 
@@ -305,5 +321,5 @@ balancedTree.prettyPrint();
 // console.log(balancedTree.preOrder());
 // console.log(balancedTree.postOrder());
 
-console.log(balancedTree.height(balancedTree.root));
-console.log(balancedTree.depth(balancedTree.root.right.right.left)) ;
+
+console.log(balancedTree.isBalanced());
