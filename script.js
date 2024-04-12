@@ -338,3 +338,7 @@ console.log(myArray);
 let myTree = new Tree (myArray);
 myTree.prettyPrint();
 console.log(myTree.isBalanced());
+
+console.log(myTree.preOrder());
+console.log(myTree.postOrder());
+console.log(myTree.inOrder());
