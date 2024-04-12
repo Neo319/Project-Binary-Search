@@ -166,6 +166,40 @@ class Tree {
         return null; //not found
     }
 
+    // Traverses the tree with breadth-first, level-order traversal, executing a callback or producing an array
+    levelOrder(callback = Tree.defaultCallback) {
+
+        if (!this.root) {
+            // Handle empty tree
+            return [];
+        }
+    
+        const queue = [this.root];
+        const result = [];
+    
+        while (queue.length > 0) {
+            const current = queue.shift();
+            // Process current node using the callback function
+            // Add current node to the result array
+            result.push(callback(current));
+    
+            // Enqueue left child if exists
+            if (current.left) {
+                queue.push(current.left);
+            }
+            // Enqueue right child if exists
+            if (current.right) {
+                queue.push(current.right);
+            }
+        }
+    
+        return result;
+    }
+    
+    // Default callback function
+    static defaultCallback(node) {
+        return node.data;
+    }
     
 
 }
@@ -190,4 +224,4 @@ balancedTree.regularPrint();
 
 console.log(balancedTree);
 
-console.log(balancedTree.find(5))
+console.log(balancedTree.levelOrder())
