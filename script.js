@@ -227,6 +227,28 @@ class Tree {
         return callback(result);
     }
 
+    postOrder (callback = Tree.defaultCallback) {
+        if (!this.root) {
+            return [];
+        }
+        let result = [];
+
+        
+        function postOrderRec (current) {
+            //base
+            if (!current) {
+                return false;
+            }
+            postOrderRec(current.left);
+            postOrderRec(current.right);
+            result.push(current);
+        }
+        postOrderRec(this.root);
+        return callback(result);
+    }
+
+
+
 }
     
 
@@ -249,5 +271,6 @@ balancedTree.prettyPrint();
 
 console.log(balancedTree);
 
-console.log(balancedTree.inOrder())
-console.log(balancedTree.preOrder())
+console.log(balancedTree.inOrder());
+console.log(balancedTree.preOrder());
+console.log(balancedTree.postOrder());
