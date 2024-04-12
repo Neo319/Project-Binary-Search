@@ -254,7 +254,28 @@ class Tree {
         const leftTree = this.height(node.left);
         const rightTree = this.height(node.right);
 
-        return Math.max(leftTree, rightTree) + 1
+        return Math.max(leftTree, rightTree) + 1;
+    }
+
+    depth (x, root = this.root) {
+
+        console.log(root)
+
+        //base
+        if (root == null) return -1;
+
+        let dist = -1;
+
+        //check if x is current node
+        if (root == x ||
+        //or check if x is in the left subtree
+        (dist = this.depth(x, root.left)) >= 0 ||
+        //or right
+        (dist = this.depth(x, root.right)) >= 0) {
+            //return distance/depth
+            return dist + 1;
+        }
+        return dist;
 
     }
 
@@ -278,10 +299,11 @@ balancedTree.remove(5);
 balancedTree.prettyPrint();
 
 
-console.log(balancedTree);
 
-console.log(balancedTree.inOrder());
-console.log(balancedTree.preOrder());
-console.log(balancedTree.postOrder());
 
-console.log(balancedTree.height(balancedTree.root))
+// console.log(balancedTree.inOrder());
+// console.log(balancedTree.preOrder());
+// console.log(balancedTree.postOrder());
+
+console.log(balancedTree.height(balancedTree.root));
+console.log(balancedTree.depth(balancedTree.root.right.right.left)) ;
