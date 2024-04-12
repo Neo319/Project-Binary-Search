@@ -49,26 +49,6 @@ class Tree {
         }
     };
 
-    // traverses the existing tree, using inorder traversal, executing a callback fn
-    inOrderTraversal (node = this.root, callback) {
-        
-        //base case
-        if (node !== null) {
-
-            //recursive case
-            this.inOrderTraversal(node.left, callback);
-            callback(node);
-            this.inOrderTraversal(node.right, callback);
-        }
-    };
-
-    //test: printing it
-    regularPrint () {
-        this.inOrderTraversal(this.root, function print (node) {
-            console.log(node.data);
-        })
-    };
-
     //inserts a given value in the appropriate position in the tree
     insert (value) {
         this.root = this._insertRec(value, this.root)
@@ -206,6 +186,39 @@ class Tree {
         return result;
     }
     
+    inOrder (callback = Tree.defaultCallback) {
+        
+        //base case
+        // if (node !== null) {
+
+        //     let result = [];
+
+        //     //recursive case
+        //     this.inOrder(node.left, callback);
+        //     result.push(node);
+        //     this.inOrder(node.right, callback);
+        //     return callback(result);
+        // }
+
+        if (!this.root) {
+            return [];
+        }
+
+        let result = [];
+
+        function inOrderRec (current) {
+            //base
+            if (!current) {
+                return false;
+            }
+            inOrderRec(current.left);
+            result.push(current);
+            inOrderRec(current.right);
+
+        }
+        inOrderRec(this.root);
+        return callback(result);
+    };
 
 }
     
@@ -225,8 +238,8 @@ balancedTree.remove(5);
 
 
 balancedTree.prettyPrint();
-balancedTree.regularPrint();
+
 
 console.log(balancedTree);
 
-console.log(balancedTree.levelOrder())
+console.log(balancedTree.inOrder())
