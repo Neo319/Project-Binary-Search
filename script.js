@@ -187,19 +187,6 @@ class Tree {
     }
     
     inOrder (callback = Tree.defaultCallback) {
-        
-        //base case
-        // if (node !== null) {
-
-        //     let result = [];
-
-        //     //recursive case
-        //     this.inOrder(node.left, callback);
-        //     result.push(node);
-        //     this.inOrder(node.right, callback);
-        //     return callback(result);
-        // }
-
         if (!this.root) {
             return [];
         }
@@ -219,6 +206,26 @@ class Tree {
         inOrderRec(this.root);
         return callback(result);
     };
+
+    preOrder (callback = Tree.defaultCallback) {
+        if (!this.root) {
+            return [];
+        }
+        let result = [];
+
+        
+        function preOrderRec (current) {
+            //base
+            if (!current) {
+                return false;
+            }
+            result.push(current);
+            preOrderRec(current.left);
+            preOrderRec(current.right);
+        }
+        preOrderRec(this.root);
+        return callback(result);
+    }
 
 }
     
@@ -243,3 +250,4 @@ balancedTree.prettyPrint();
 console.log(balancedTree);
 
 console.log(balancedTree.inOrder())
+console.log(balancedTree.preOrder())
