@@ -294,6 +294,16 @@ class Tree {
         else return true;
     }
 
+    rebalance () {
+        if (this.isBalanced()) {
+            return null;
+        }
+
+        //give sorted array to "sortedArrayToBST"
+        this.root = this.sortedArrayToBST(this.inOrder());
+        return this.root;
+    }
+
 }
     
 
@@ -321,5 +331,11 @@ balancedTree.prettyPrint();
 // console.log(balancedTree.preOrder());
 // console.log(balancedTree.postOrder());
 
+
+console.log(balancedTree.isBalanced());
+
+balancedTree.rebalance();
+
+balancedTree.prettyPrint();
 
 console.log(balancedTree.isBalanced());
