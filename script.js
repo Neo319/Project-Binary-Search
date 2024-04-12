@@ -307,35 +307,34 @@ class Tree {
 }
     
 
- 
-
-const myArray = [3, 5, 7, 9, 11, 13, 15] //sample
-
-const balancedTree = new Tree(myArray);
-
-balancedTree.insert(2);
-balancedTree.insert(20);
-balancedTree.insert(8)
-
-balancedTree.remove(5);
-
-balancedTree.root.right.right.right.right = new Node(50);
-balancedTree.root.right.right.right.right.right = new Node(51);
-
-balancedTree.prettyPrint();
 
 
 
 
-// console.log(balancedTree.inOrder());
-// console.log(balancedTree.preOrder());
-// console.log(balancedTree.postOrder());
 
 
-console.log(balancedTree.isBalanced());
+// ---------Driver Script---------
 
-balancedTree.rebalance();
+//generates array of 20 different random numbers <100
+function randomArray () {
+    let output = [];
 
-balancedTree.prettyPrint();
+    while (output.length < 20) {
+        //generate a number < 100
+        let x = Math.floor(Math.random() * 100);
 
-console.log(balancedTree.isBalanced());
+        //see if it is already in the array
+        if (!output.includes(x)) {
+            //if not, push to array
+            output.push(x);
+        }
+    }
+    return output.sort((a, b) => a - b); //sort array numerically
+}
+
+let myArray = randomArray();
+console.log(myArray);
+
+let myTree = new Tree (myArray);
+myTree.prettyPrint();
+console.log(myTree.isBalanced());
